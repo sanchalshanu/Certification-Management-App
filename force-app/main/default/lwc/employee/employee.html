@@ -1,0 +1,33 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Add Employee">
+            <lightning-card title="Employee" icon-name="action:add_contact">
+                <div style="margin: auto;">
+                    <lightning-record-form object-api-name="Employee__c" onsuccess={handleSuccess} fields={fields}>
+                    </lightning-record-form>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Details">
+            <lightning-card title="Update" icon-name="utility:summarydetail">
+                <div class="slds-m-around_medium"> 
+                    
+                        <lightning-datatable
+                            key-field="Id"
+                            data={employee.data}
+                            columns={columns}
+                            onsave={Save}
+                            onrowselection={ClickAdd}
+                            draft-values={draftValues}></lightning-datatable>
+                            
+                    
+                    <center>
+                        <lightning-button variant="destructive" label="Delete" icon-name="utility:delete"
+                            icon-position="right" onclick={deleterecord1}></lightning-button>
+                    </center>
+                   
+                </div> 
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>  
+</template>
