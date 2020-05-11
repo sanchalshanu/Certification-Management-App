@@ -11,10 +11,10 @@
         <lightning-tab label="Certification Request Details" >
             <lightning-card title="Certification" icon-name="standard:skill_requirement">
                 <div class="slds-m-around_medium">
-                    <template if:true={certificationRequest.data}>
+                    <template if:true={data}>
                         <lightning-datatable
                             key-field="Id"
-                            data={certificationRequest.data}
+                            data={data}
                             onsave={Save}
                             onrowselection={ClickAdd}
                             draft-values={draftValues}

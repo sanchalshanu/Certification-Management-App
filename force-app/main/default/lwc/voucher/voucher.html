@@ -11,9 +11,9 @@
         <lightning-tab label="Voucher Details" title="2nd tab extended title">
             <lightning-card title="Voucher" icon-name="standard:record">
                 <div class="slds-m-around_medium">
-                    <template if:true={vouch.data}>
+                    <template if:true={data}>
                         <lightning-datatable key-field="Id" 
-                        data={vouch.data} 
+                        data={data} 
                         columns={columns}
                         onsave={Save}
                         onrowselection={handleClickAdd}

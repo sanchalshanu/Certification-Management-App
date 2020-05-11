@@ -10,11 +10,11 @@ public with sharing class fetchdata {
     }
     @AuraEnabled(Cacheable = true)
     public static List<Certification_Request__c> certificationReqDataFetch(){
-        return [SELECT Id, Name, Due_Date__c, Status__c, Comments__c,Email_recipient__c FROM Certification_Request__c ORDER BY Id ];
+        return [SELECT Id, Name, Due_Date__c, Status__c, Comments__c,Certification__r.Cert_Name__c,Employee__r.Emp_Name__c,Voucher__r.Voucher_Name__c FROM Certification_Request__c];
     }
     @AuraEnabled(Cacheable = true)
     public static List<Voucher__c> voucherDataFetch(){
-        return [ SELECT Id,Active__c,Name,Validity__c,Voucher_Cost__c,Voucher_Name__c,Comments__c FROM Voucher__c ORDER BY Id ASC NULLS FIRST LIMIT 10 ];
+        return [ SELECT Id,Active__c,Name,Validity__c,Voucher_Cost__c,Voucher_Name__c,Comments__c, Certification__r.Cert_Name__c FROM Voucher__c ORDER BY Id ASC NULLS FIRST LIMIT 10 ];
     }
     
 }

@@ -16,6 +16,7 @@ const cols=[
     { label: 'Voucher Cost', fieldName: 'Voucher_Cost__c', editable: 'true', type: 'currency', typeAttributes: { currencyCode: 'INR'}, cellAttributes: { alignment: 'left' } },
     { label: 'Voucher Validity', fieldName: 'Validity__c', editable: 'true'},
     { label: 'Comments', fieldName: 'Comments__c', editable: 'true'},
+    { label: 'Certification Name', fieldName: 'Certification__c', type: 'text' }
 ];
 
 export default class Voucher extends LightningElement {
@@ -40,6 +41,38 @@ export default class Voucher extends LightningElement {
     error;
     refreshing;
     @wire(getVoucher)vouch;
+    @wire(getVoucher)
+    Voucher__c(result) {
+        this.refreshing = result;
+        if (result.data) {
+            let values = [];
+            result.data.forEach(request => {
+                let value = {};
+                value.Id = request.Id;
+                value.Name = request.Name;
+                value.Voucher_Name__c = request.Voucher_Name__c;
+                value.Voucher_Cost__c = request.Voucher_Cost__c;
+                value.Validity__c = request.Validity__c;
+                value.Active__c = request.Active__c;
+                value.Comments__c = request.Comments__c;
+                if (request.hasOwnProperty('Certification__r')) {
+                    value.Certification__c = request.Certification__r.Cert_Name__c;
+                } else {
+                    value.Certification__c = "";
+                }
+                
+                values.push(value);
+            });
+            this.data = values;
+            console.log(result.data);
+            this.error = undefined;
+        } else if (result.error) {
+            this.data = undefined;
+            this.error = result.error;
+        }
+        console.log("Error: " + this.error);
+    }
+
     
     
     Save(event) {
